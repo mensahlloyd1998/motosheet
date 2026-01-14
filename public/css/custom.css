@@ -1,0 +1,246 @@
+
+body{
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    background-color: #f4f4f4;
+}
+.layout-1 .wrapper .page-header {
+    background-color: #f4f4f4;
+}
+p, li, a, span{
+    font-size: .875rem;
+}
+.cstm-page-info h1{
+    font-size: 1.4rem; 
+    font-weight:500;
+  }
+.cstm-page-info small{
+    font-size: .875rem;
+    font-weight:300;
+}
+.cstm-fs-10{
+    font-size: .75rem;
+}
+.cstm-fs-12{
+    font-size: .75rem;
+}
+.m-link span{
+    font-size: .82rem;
+}
+.cstm-fs-14{
+    font-size: .875rem;
+}
+.cstm-fs-16{
+    font-size: 1rem;
+}
+.cstm-fs-18{
+    font-size: 1.125rem;
+}
+.cstm-fs-20{
+    font-size: 1.25rem;
+}
+.cstm-fs-24{
+    font-size: 1.5rem;
+}
+.app-demo {
+    position: relative;
+    overflow: hidden;
+}
+.order-status-tile{
+    border: 1px solid #cdcdcd;
+}
+.order-status-tile:hover{
+    border: 1px solid rgb(0, 132, 255);
+    cursor: pointer;
+}
+.order-status-tile[data-selected="true"]{
+    border: 2px solid rgb(0, 132, 255) !important;
+}
+.app-demo .card-overlay {
+    position: absolute;
+    top: -60px;
+    left: -60px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    z-index: 1;
+}
+
+.app-demo:hover .card-overlay {
+    -webkit-transform: scale(35);
+    transform: scale(35);
+}
+
+.app-demo:hover .demo-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+.form-control{
+    font-size: .875rem;
+    font-weight: 300;
+}
+
+.app-demo .demo-text {
+    transition: all .3s;
+    transition-delay: .1s;
+    transform: translateY(20px);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    justify-content: center;
+    width: calc(100% - 1rem);
+    height: calc(100% - 1rem);
+    align-items: center;
+    color: #fff;
+    opacity: 0;
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.modal-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.modal-body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+/*style for larger modal */
+    .cstm-modal-lg .modal-dialog{
+        max-width: 800px; /* Set the desired maximum width */
+    }
+.swal2-popup {
+    font-size: 14px !important;
+}
+
+.cstm-border-hover-primary:hover{
+  cursor: pointer;
+  border-color: #0155ff !important;
+}
+.cstm-success-badge{
+  background-color: #d7fcde;
+}
+.cstm-danger-badge{
+  background-color: #fcd7d9;
+}
+.cstm-warning-badge{
+  background-color: #fafcd7;
+}
+.cstm-grey-badge{
+  background-color: #deded9;
+}
+.cstm-fs-10{
+  font-size: 0.625rem;
+}
+
+.input-group > .select2{
+  width: 45% !important;
+}
+.input-group > .select2-container--bootstrap {
+    width: auto;
+    flex: 1 1 auto;
+}
+
+.input-group > .select2-container--bootstrap .select2-selection--single {
+    height: 100%;
+    line-height: inherit;
+    padding: 0.5rem 1rem;
+}
+
+.date-div {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.hour-div {
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+.rating-modal-selectors-blue:hover
+{
+  cursor: pointer;
+  background-color: #2794eb !important;
+  color: #fff;
+}
+
+@media (min-width:500px){
+  .input-group > .select2{
+    width: 60% !important;
+  }
+}
+
+@media (min-width:600px){
+  .input-group > .select2{
+    width: 65% !important;
+  }
+}
+
+@media (min-width:650px){
+  .input-group > .select2{
+    width: 68% !important;
+  }
+}
+
+@media (min-width:700px){
+  .input-group > .select2{
+    width: 70% !important;
+  }
+}
+@media (min-width:800px){
+  .input-group > .select2{
+    width: 82% !important;
+  }
+}
+
+@media only screen and (max-width: 1600px){
+  body, p{
+    font-size: 14px;
+  }
+  
+}
+.text-warning-2{
+  color :rgb(240, 156, 60);
+}
+/* When collapsed */
+.sidebar-mini .logo-lg {
+  display: none;
+}
+.sidebar-mini .logo-sm {
+  display: inline;
+}
+
+.custom-table-2 thead{
+    background-color: #eaeaea;
+}
+
+.custom-table-2 thead tr th{
+    text-transform: capitalize !important;
+}
+
+.text-dark{
+  color: #1f1f1f;
+}
+
+.table-row-title{
+  color: #1f1f1f;
+  font-weight: 300;
+}
+
+img {
+  filter: saturate(1);
+}
+    /* When collapsed */
+    .sidebar-mini .logo-lg {
+      display: none;
+    }
+    .sidebar-mini .logo-sm {
+      display: inline;
+    }
