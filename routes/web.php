@@ -13,7 +13,7 @@ use App\Http\Controllers\ProfileController;
 
 // Landing Page
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
 // Public car page (Carfolio page)

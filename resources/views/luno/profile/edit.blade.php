@@ -17,8 +17,8 @@
 
 @section('page_details')
     <div class="col-auto cstm-page-info">
-      <h1 class=" mt-1 mb-0">Profile Settings</h1>
-      <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+      <h1 class=" mt-1 mb-0">User Account Settings</h1>
+      <p class="text-muted">Edit profile/account information.</p>
     </div>
 @endsection
 
