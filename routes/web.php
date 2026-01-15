@@ -35,7 +35,7 @@ Route::post('/car/{car:slug}/inquiry', [InquiryController::class, 'store'])
 // });
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     // Seller dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])

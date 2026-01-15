@@ -108,7 +108,7 @@
                         </div>
                         <!-- start: search area -->
                         <div class="header-left px-3 flex-grow-1 d-none d-md-block">
-                            <h4>Business</h4>
+                            <!-- <h4>Business</h4> -->
                         </div>
                         <div class="ps-4 mx-auto d-md-none">
                             <img src="{{ asset('system_img/motosheet-logo.png') }}" width="100px" alt="logo">
