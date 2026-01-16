@@ -18,6 +18,11 @@
       font-family: 'Inter', sans-serif;
       font-weight: 300;
     }
+    .auth-form-header{
+      font-size: .875rem;
+      letter-spacing: 2px;
+      text-align:center;
+    }
   </style>
 </head>
 
@@ -31,14 +36,20 @@
         <div class="row g-3 justify-content-center">
           
           <div class="col-lg-6 d-flex justify-content-center align-items-center">
+
+            <div class="">
+              <div class="d-flex justify-content-center align-items-center mb-4">
+                <img src="{{asset('system_img/motosheet-logo.png')}}" class="" style="filter: saturate(1);" width="220px"/>
+              </div>
             <div class="card shadow-sm w-100 p-4 p-md-5" style="max-width: 32rem;">
               <!-- Form -->
               <form class="row g-3" method="post" action="{{ route('register') }}"autocomplete="off">
                 @csrf
                 <div class="col-12 mb-2">
-                  <h1 class="h2">Register</h1>
-                  <p class="fw-light mb-0">Free access to our dashboard.</p>
-                </div>
+                    <!-- <h1 class="h2">Welcome</h1>
+                    <p class="fw-light mb-0">Enter your email and password to login</p> -->
+                    <p class="text-uppercase fw-light fs-14 auth-form-header">create an  account</p>
+                  </div>
 
                 <div class="col-12">
                     <div class="form-floating mb-0">
@@ -74,13 +85,13 @@
                     </div>
                 </div>
 
-                <div class="col-12">
+                <!-- <div class="col-12">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                     <label class="form-check-label fw-light" for="flexCheckDefault"> I accept the <a href="#" title="" class="text-primary">Terms and Conditions</a>
                     </label>
                   </div>
-                </div>
+                </div> -->
                 <div class="col-12 text-center mt-4">
                   <button type="submit" class="btn btn-lg w-100 btn-block btn-dark  text-uppercase">Register</button>
                 </div>
@@ -89,6 +100,7 @@
                 </div>
               </form>
               <!-- End Form -->
+            </div>
             </div>
           </div>
         </div> <!-- End Row -->
