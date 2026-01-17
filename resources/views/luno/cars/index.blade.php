@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="alert alert-warning mb-2">
-                    <span class="cstm-fs-14">{{  session('success') }}</span>
+                    <span class="cstm-fs-14">Provide contact details to be included on posters/labels</span>
                 </div>
 
             </div>
