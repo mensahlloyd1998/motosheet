@@ -24,6 +24,18 @@
 
 @section('content')
 
+
+    @if(auth()->user()->phone == null)
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-warning mb-2">
+                    <span class="cstm-fs-14">{{  session('success') }}</span>
+                </div>
+
+            </div>
+        </div>
+    @endif
+
     @if(session('success'))
         <div class="row">
             <div class="col-12">

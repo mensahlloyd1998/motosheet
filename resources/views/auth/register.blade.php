@@ -109,7 +109,7 @@
   </div>
   
   <!-- Jquery Page Js -->
-  <script src="./assets/js/theme.js"></script>
+  <script src="{{ route('assets/js/theme.js') }}"></script>
 </body>
 
 </html>
