@@ -236,45 +236,59 @@
                     <div class="row">
 
                         {{-- Identity --}}
-                        <div class="mb-3 col-md-4">
+                        <!-- <div class="mb-3 col-md-4">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="make" name="make" placeholder="Toyota">
                                 <label for="make">Make *</label>
                             </div>
                             @error('make') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+                        </div> -->
 
-                        <div class="mb-3 col-md-4">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="model" name="model" placeholder="Corolla">
-                                <label for="model">Model *</label>
-                            </div>
-                            @error('model') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+                        <x-form-floating-field
 
-                        <div class="mb-3 col-md-4">
-                            <div class="form-floating">
-                                <input type="number" class="form-control" id="year" name="year" placeholder="2020">
-                                <label for="year">Year *</label>
-                            </div>
-                            @error('year') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+                            name="make"
+                            label="Make *"
+                            type="text"
+                            col="col-md-4"
+                        
+                        />
 
-                        <div class="mb-3 col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="trim" name="trim" placeholder="SE">
-                                <label for="trim">Trim</label>
-                            </div>
-                            @error('trim') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+                        <x-form-floating-field
 
-                        <div class="mb-3 col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="color" name="color" placeholder="SE">
-                                <label for="color">Exterior Color</label>
-                            </div>
-                            @error('color') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+                            name="model"
+                            label="Model *"
+                            type="text"
+                            col="col-md-4"
+
+                        />
+
+
+                        <x-form-floating-field
+
+                            name="year"
+                            label="Year *"
+                            type="number"
+                            col="col-md-4"
+
+                        />
+
+                        <x-form-floating-field
+
+                            name="trim"
+                            label="Trim *"
+                            type="text"
+                            col="col-md-6"
+
+                        />
+
+                        <x-form-floating-field
+
+                            name="color"
+                            label="Exterior Color *"
+                            type="text"
+                            col="col-md-6"
+
+                        />
 
                         {{-- Specs --}}
                         <div class="mb-3 col-md-6">
@@ -303,13 +317,14 @@
                             @error('fuel_type') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
                         </div>
 
-                        <div class="mb-3 col-md-6">
-                            <div class="form-floating">
-                                <input type="number" class="form-control" id="mileage" name="mileage" placeholder="Mileage">
-                                <label for="mileage">Mileage in miles *</label>
-                            </div>
-                            @error('mileage') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+                        <x-form-floating-field
+
+                            name="mileage"
+                            label="Mileage in miles *"
+                            type="number"
+                            col="col-md-6"
+
+                        />
 
                         <div class="mb-3 col-md-6">
                             <div class="form-floating">
@@ -324,14 +339,15 @@
                             @error('condition') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
                         </div>
 
-                        {{-- Pricing --}}
-                        <div class="mb-3 col-md-6">
-                            <div class="form-floating">
-                                <input type="number" step="100" class="form-control" id="price" name="price" placeholder="">
-                                <label for="price">Price (GHS) *</label>
-                            </div>
-                            @error('price') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+
+                        <x-form-floating-field
+
+                            name="price"
+                            label="Price (GHS)*"
+                            type="number"
+                            col="col-md-6"
+
+                        />
 
                         <div class="mb-3 col-md-6">
                             <div class="form-floating">
@@ -413,45 +429,46 @@
                     <div class="row">
 
                         {{-- Identity --}}
-                        <div class="mb-3 col-md-4">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="edit-make" name="make" placeholder="Toyota">
-                                <label for="make">Make *</label>
-                            </div>
-                            @error('make') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
 
-                        <div class="mb-3 col-md-4">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="edit-model" name="model" placeholder="Corolla">
-                                <label for="model">Model *</label>
-                            </div>
-                            @error('model') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+                        <x-form-floating-field
+                            name="make"
+                            label="Make *"
+                            type="text"
+                            idPrefix="edit"
+                            col="col-md-4"
+                        />
 
-                        <div class="mb-3 col-md-4">
-                            <div class="form-floating">
-                                <input type="number" class="form-control" id="edit-year" name="year" placeholder="2020">
-                                <label for="year">Year *</label>
-                            </div>
-                            @error('year') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+                        <x-form-floating-field
+                            name="model"
+                            label="Model *"
+                            type="text"
+                            idPrefix="edit"
+                            col="col-md-4"
+                        />
 
-                        <div class="mb-3 col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="edit-trim" name="trim" placeholder="SE">
-                                <label for="trim">Trim</label>
-                            </div>
-                            @error('trim') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+                        <x-form-floating-field
+                            name="year"
+                            label="Year *"
+                            type="number"
+                            idPrefix="edit"
+                            col="col-md-4"
+                        />
 
-                        <div class="mb-3 col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="edit-color" name="color" placeholder="SE">
-                                <label for="color">Exterior Color</label>
-                            </div>
-                            @error('color') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+                        <x-form-floating-field
+                            name="trim"
+                            label="Trim"
+                            type="text"
+                            idPrefix="edit"
+                            col="col-md-6"
+                        />
+
+                        <x-form-floating-field
+                            name="color"
+                            label="Exterior Color *"
+                            type="text"
+                            idPrefix="edit"
+                            col="col-md-6"
+                        />
 
                         {{-- Specs --}}
                         <div class="mb-3 col-md-6">
@@ -480,13 +497,21 @@
                             @error('fuel_type') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
                         </div>
 
-                        <div class="mb-3 col-md-6">
-                            <div class="form-floating">
-                                <input type="number" class="form-control" id="edit-mileage" name="mileage" placeholder="Mileage">
-                                <label for="mileage">Mileage in miles *</label>
-                            </div>
-                            @error('mileage') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
+                        <x-form-floating-field
+                            name="mileage"
+                            label="Mileage in miles *"
+                            type="text"
+                            idPrefix="edit"
+                            col="col-md-6"
+                        />
+
+                        <x-form-floating-field
+                            name="price"
+                            label="Price *"
+                            type="number"
+                            idPrefix="edit"
+                            col="col-md-6"
+                        />
 
                         <div class="mb-3 col-md-6">
                             <div class="form-floating">
@@ -501,14 +526,6 @@
                             @error('condition') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
                         </div>
 
-                        {{-- Pricing --}}
-                        <div class="mb-3 col-md-6">
-                            <div class="form-floating">
-                                <input type="number" step="100" class="form-control" id="edit-price" name="price" placeholder="">
-                                <label for="price">Price (GHS) *</label>
-                            </div>
-                            @error('price') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
-                        </div>
 
                         <div class="mb-3 col-md-6">
                             <div class="form-floating">
@@ -653,7 +670,7 @@
                     $('#edit-model').val(response.car.model);
                     $('#edit-trim').val(response.car.trim);
                     $('#edit-year').val(response.car.year);
-                    $('#edit-color').val(response.car.color);
+                    $('#edit-color').val(response.car.exterior_color);
                     $('#edit-mileage').val(response.car.mileage);
                     $('#edit-price').val(response.car.price);
                     $('#edit-transmission').val(response.car.transmission);
