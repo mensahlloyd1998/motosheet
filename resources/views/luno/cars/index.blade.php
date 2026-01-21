@@ -93,8 +93,8 @@
                     <thead>
                         <tr class="py-3">
                             <th class="fw-light text-dark">vehicle</th>
-                            <th class="fw-light text-dark d-none d-table-cell">page status</th>
-                            <th class="fw-light text-dark d-none d-table-cell">price</th>
+                            <th class="fw-light text-dark d-none d-lg-table-cell">page status</th>
+                            <th class="fw-light text-dark d-none d-lg-table-cell">price</th>
                             <th class="fw-light text-dark">metrics</th>
                             <th class="fw-light text-dark">actions</th>
                         </tr>
@@ -128,11 +128,11 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="d-none d-table-cell">
+                            <td class="d-none d-lg-table-cell">
                                 <span class="text-capitalize">{{ $data->status}}</span><br>
                                 <!-- <small class="text-muted"></small> -->
                             </td>
-                            <td class="d-none d-table-cell">
+                            <td class="d-none d-lg-table-cell">
                                 <span>GHS {{ $data->price}}</span><br>
                                 <!-- <small class="text-muted">Negotiable</small> -->
                             </td>

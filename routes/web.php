@@ -102,6 +102,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/cars/images/{image}', [CarImageController::class, 'destroy'])
         ->name('cars.images.destroy');
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Offer Management
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/offers', [InquiryController::class, 'offers'])->name('offers.index');
+    
+
+
     /*
     |--------------------------------------------------------------------------
     | Payments

@@ -70,6 +70,13 @@
                                     <span class="ms-2">Vehicles</span>
                                 </a>
                             </li>
+
+                            <li>
+                                <a class="m-link" href="{{ route('offers.index') }}">
+                                    <i class="bi bi-cash-coin fs-6"></i>
+                                    <span class="ms-2">Offers</span>
+                                </a>
+                            </li>
 <!-- 
 
                             <li>

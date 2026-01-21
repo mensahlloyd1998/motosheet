@@ -37,4 +37,22 @@ class InquiryController extends Controller
         //Redirect
         return redirect()->back()->with('success', "Your offer was submitted successfully");
     }
+
+    /*
+    |------------------------------------------
+    | Offer Management
+    |------------------------------------------
+    */
+    public function offers(Request $request)
+    {
+        $offers = Inquiry::whereNotNull('offer_price')
+            ->whereHas('car', function ($query) {
+                $query->where('user_id', auth()->user()->id);
+            })
+            ->with('car')
+            ->latest()
+            ->get();
+    
+        return view('luno.offers.index', compact('offers'));
+    }
 }
