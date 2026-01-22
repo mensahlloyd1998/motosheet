@@ -371,6 +371,32 @@
                         </div>
 
                         <div class="mb-3 col-12">
+                            <label class="form-label fw-medium">Vehicle Features</label>
+                            {{-- Features --}}
+                            <div id="features-wrapper">
+                                <div class="input-group mb-2">
+                                    <input
+                                        type="text"
+                                        name="features[]"
+                                        class="form-control"
+                                        placeholder="e.g. Air Conditioning"
+                                    >
+                                    <button type="button" class="btn btn-outline-danger remove-feature" disabled>
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="add-feature">
+                                <i class="bi bi-plus-circle"></i> Add feature
+                            </button>
+
+                            <small class="text-muted d-block mt-1">
+                                Add each feature separately (e.g. Bluetooth, Reverse Camera).
+                            </small>
+                        </div>
+
+                        <div class="mb-3 col-12">
                             <label class="form-label fw-medium">
                                 Vehicle Images
                             </label>
@@ -604,6 +630,44 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             $('.dropify').dropify();
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const featuresWrapper = document.getElementById('features-wrapper');
+            const addFeatureBtn   = document.getElementById('add-feature');
+
+            addFeatureBtn.addEventListener('click', function () {
+                const featureRow = document.createElement('div');
+                featureRow.classList.add('input-group', 'mb-2');
+
+                featureRow.innerHTML = `
+                    <input
+                        type="text"
+                        name="features[]"
+                        class="form-control"
+                        placeholder="e.g. Bluetooth"
+                    >
+                    <button type="button" class="btn btn-outline-danger remove-feature">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                `;
+
+                featuresWrapper.appendChild(featureRow);
+                updateRemoveButtons();
+            });
+
+            featuresWrapper.addEventListener('click', function (e) {
+                if (e.target.closest('.remove-feature')) {
+                    e.target.closest('.input-group').remove();
+                    updateRemoveButtons();
+                }
+            });
+
+            function updateRemoveButtons() {
+                const buttons = featuresWrapper.querySelectorAll('.remove-feature');
+                buttons.forEach(btn => btn.disabled = buttons.length === 1);
+            }
         });
 
         $(document).on('click', '.delete-image', function () {

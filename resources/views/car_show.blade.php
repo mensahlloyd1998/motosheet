@@ -171,17 +171,22 @@
                 </section>
 
                 {{-- Features --}}
-                <section class="mb-5">
-                    <h2 class="h6 border-bottom border-secondary mb-4 pb-2">Special Features</h2>
-                    <ul class="list-unstyled">
-                        @foreach(['Leather Seats','Sunroof','Bluetooth Connectivity','Rear Camera','Heated Seats'] as $feature)
-                            <li class="d-flex align-items-center mb-2">
-                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                                {{ $feature }}
-                            </li>
-                        @endforeach
-                    </ul>
-                </section>
+                @if(is_array($car->features) && count(array_filter($car->features)))
+                    <section class="mb-5">
+                        <h2 class="h6 border-bottom border-secondary mb-4 pb-2">
+                            Special Features
+                        </h2>
+
+                        <ul class="list-unstyled row">
+                            @foreach(array_filter($car->features) as $feature)
+                                <li class="col-6 col-md-4 d-flex align-items-center mb-2">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    {{ $feature }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </section>
+                @endif
 
             </div>
 

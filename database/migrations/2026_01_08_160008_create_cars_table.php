@@ -29,7 +29,7 @@ return new class extends Migration {
 
             $table->text('description')->nullable();
 
-            $table->enum('status', ['draft', 'active', 'expired', 'sold'])
+            $table->enum('status', ['draft', 'active', 'paused', 'expired', 'sold'])
                   ->default('draft');
 
             $table->timestamp('expires_at')->nullable();

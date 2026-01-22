@@ -35,6 +35,7 @@ class Car extends Model
         'is_paid',
         'paid_at',
         'payment_reference',
+        'features'
     ];
 
     protected $casts = [
@@ -42,6 +43,7 @@ class Car extends Model
         'paid_at'    => 'datetime',
         'is_paid'    => 'boolean',
         'price'      => 'decimal:2',
+        'features' => 'array',
     ];
 
     /* -------------------------

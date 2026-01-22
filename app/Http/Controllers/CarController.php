@@ -58,6 +58,9 @@ class CarController extends Controller
             // Require images array with at least 5 files
             'images'         => ['required', 'array', 'min:5'],
             'images.*'       => ['image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'features'   => 'nullable|array',
+            'features.*' => 'nullable|string|max:255',
+        
         ]);
 
         DB::transaction(function () use ($validated, $request) {
@@ -67,10 +70,14 @@ class CarController extends Controller
 
             // 2. Generate unique slug
             $baseSlug = Str::slug($title);
-            $slug = $baseSlug;
+            $slug = $baseSlug. '-' . now()->timestamp;
             $count = 1;
 
-            while (Car::where('slug', $slug)->exists()) {
+            while (
+                Car::where('user_id', auth()->id())
+                    ->where('slug', $slug)
+                    ->exists()
+            ) {
                 $slug = "{$baseSlug}-{$count}";
                 $count++;
             }
@@ -94,6 +101,9 @@ class CarController extends Controller
                 'description'    => $validated['description'],
                 'status'         => 'draft',
                 'expires_at'     => now()->addDays(30),
+                'features' => array_values(
+                    array_filter($validated['features'] ?? [])
+                )
             ]);
 
             // 4. Save images
