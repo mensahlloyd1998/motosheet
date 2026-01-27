@@ -18,7 +18,7 @@
 @section('page_details')
     <div class="col-auto cstm-page-info">
       <h1 class=" mt-1 mb-0">Offers</h1>
-      <p class="text-muted">Manage your vehicle listings, track offers and controller visibility.</p>
+      <p class="text-muted">A complete list of offers made on your vehicle listings.</p>
     </div>
 @endsection
 
@@ -57,7 +57,7 @@
         </div>
     @endif
 
-    <div class="row mt-2">
+   <!-- <div class="row mt-2">
 
         <div class="col-12">
             <div class="card p-0 mb-4">
@@ -74,9 +74,9 @@
                             <i class="bi bi-arrow-repeat"></i>
                         </a>
                         
-                        <!-- <a href="#" data-bs-target="#create-modal" data-bs-toggle="modal" class="btn btn-primary">
+                        <a href="#" data-bs-target="#create-modal" data-bs-toggle="modal" class="btn btn-primary">
                             Add Vehicle
-                        </a> -->
+                        </a> 
                             
                     </div>
                 </form>
@@ -84,7 +84,7 @@
         </div>
 
 
-    </div>
+    </div>-->
 
     <div class="row g-2">
         <div class="col-12">
@@ -95,7 +95,7 @@
                             <th class="fw-light text-dark">vehicle</th>
                             <th class="fw-light text-dark">buyer</th>
                             <th class="fw-light text-dark">offer</th>
-                            <th class="fw-light text-dark">actions</th>
+                            <!--<th class="fw-light text-dark">actions</th>-->
                         </tr>
                     </thead>
                     <tbody>
@@ -131,14 +131,14 @@
                                 <small class="text-muted">{{ $data->phone }}</small>
                             </td>
                             <td>
-                                <span class="text-capitalize">{{ $data->offer_price }}</span><br>
+                                <span class="text-capitalize">GHS {{ $data->offer_price }}</span><br>
                                 <small class="text-muted"></small>
                             </td>
-                            <td>
+                            <!--<td>
                                 <a href="#" class="btn btn-link  btn-md text-primary ">
                                     <i class="bi bi-pencil-square fs-6"></i>
                                 </a>
-                            </td>
+                            </td>-->
                         </tr>
                         @endforeach
                     </tbody>

@@ -574,6 +574,16 @@
                             @error('description') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
                         </div>
 
+                        <div class="mb-3 col-12">
+                            <label class="form-label fw-medium">Vehicle Features</label>
+
+                            <div id="edit-features-wrapper"></div>
+
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="edit-add-feature">
+                                <i class="bi bi-plus-circle"></i> Add feature
+                            </button>
+                        </div>
+
                         <div class="mt-4 col-md-12">
                             <h6 class="mb-2">Car Images</h6>
 
@@ -698,6 +708,17 @@
             });
         });
 
+        $(document).on('click', '#edit-add-feature', function () {
+            $('#edit-features-wrapper').append(featureRow());
+            updateEditRemoveButtons();
+        });
+
+
+        $(document).on('click', '.remove-edit-feature', function () {
+            $(this).closest('.input-group').remove();
+            updateEditRemoveButtons();
+        });
+
         function show_edit_form(carId) {
             const $modal = $('#edit-modal');
             const $modalContent = $modal.find('.modal-content');
@@ -743,6 +764,23 @@
                     $('#edit-condition').val(response.car.condition);
                     $('#edit-is_negotiable').val(response.car.price_type == 'negotiable'? 1 : 0);
 
+                    // Clear existing features
+                    const wrapper = $('#edit-features-wrapper');
+                    wrapper.html('');
+
+                    // Load existing features
+                    if (response.car.features && response.car.features.length) {
+                        response.car.features.forEach(feature => {
+                            wrapper.append(featureRow(feature));
+                        });
+                    } else {
+                        wrapper.append(featureRow(''));
+                    }
+
+                    // Enable remove logic
+                    updateEditRemoveButtons();
+
+
                     loadCarImages(carId)
                     
                     // Set form action and method
@@ -773,6 +811,29 @@
                 }
             });
         }
+
+
+        function featureRow(value = '') {
+            return `
+                <div class="input-group mb-2">
+                    <input type="text"
+                        name="features[]"
+                        class="form-control"
+                        value="${value}"
+                        placeholder="e.g. Bluetooth"
+                    >
+                    <button type="button" class="btn btn-outline-danger remove-edit-feature">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            `;
+        }
+
+        function updateEditRemoveButtons() {
+            const buttons = document.querySelectorAll('.remove-edit-feature');
+            buttons.forEach(btn => btn.disabled = buttons.length === 1);
+        }
+
 
 
         function loadCarImages(carId) {

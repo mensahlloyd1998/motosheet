@@ -138,12 +138,14 @@ class CarController extends Controller
             'is_negotiable'  => ['required', 'boolean'],
             'description'    => ['required', 'string'],
             'images.*'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'features'       => ['nullable', 'array'],
+            'features.*'     => ['nullable', 'string', 'max:255'],
         ]);
     
         DB::transaction(function () use ($request, $validated, $car) {
     
             /**
-             * 1. Ensure minimum image count (existing + new)
+             * Ensure minimum image count (existing + new)
              */
             $existingImagesCount = $car->images()->count();
             $newImagesCount = $request->hasFile('images')
@@ -157,7 +159,7 @@ class CarController extends Controller
             }
     
             /**
-             * 2. Regenerate title ONLY if identity changes
+             * Regenerate title ONLY if identity changes
              */
             $identityChanged =
                 $car->make !== $validated['make'] ||
@@ -175,7 +177,7 @@ class CarController extends Controller
             }
     
             /**
-             * 3. Update car record
+             * Update car record
              */
             $car->update([
                 'make'           => $validated['make'],
@@ -190,10 +192,21 @@ class CarController extends Controller
                 'fuel_type'      => $validated['fuel_type'],
                 'condition'      => $validated['condition'],
                 'description'    => $validated['description'],
+                // 'features'       => array_values(
+                //     array_filter($validated['features'] ?? [])
+                // ),
             ]);
+
+            if ($request->has('features')) {
+                $car->features = array_values(
+                    array_filter($validated['features'])
+                );
+
+                $car->save();
+            }
     
             /**
-             * 4. Handle new images (append only)
+             * Handle new images (append only)
              */
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
