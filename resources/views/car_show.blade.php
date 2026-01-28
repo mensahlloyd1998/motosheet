@@ -233,7 +233,7 @@
                                         type="text"
                                         name="phone"
                                         class="form-control"
-                                        value="{{ old('phone') }}"
+                                        value="{{ old('phone') ?? '+233' }}"
                                         placeholder="Phone Number">
                                     <label>Phone Number *</label>
                                 </div>
