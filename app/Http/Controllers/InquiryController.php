@@ -21,7 +21,7 @@ class InquiryController extends Controller
         ]);
 
         if (!preg_match('/^\+233\d{9}$/', $request->phone)) {
-            return Redirect::back()->withErrors(['phone' => 'Wrong phone number format']);
+            return back()->withErrors(['phone' => 'Wrong phone number format']);
         }
 
         // Store
