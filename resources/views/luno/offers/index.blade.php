@@ -18,7 +18,7 @@
 @section('page_details')
     <div class="col-auto cstm-page-info">
       <h1 class=" mt-1 mb-0">Offers</h1>
-      <p class="text-muted">A complete list of offers made on your vehicle listings.</p>
+      <p class="text-muted">A complete list of offers made on your vehicle listings. <br> Use the search field to filter offers by vehicle make or model</p>
     </div>
 @endsection
 
@@ -57,7 +57,7 @@
         </div>
     @endif
 
-   <!-- <div class="row mt-2">
+   <div class="row mt-2">
 
         <div class="col-12">
             <div class="card p-0 mb-4">
@@ -65,7 +65,7 @@
                     @csrf
                     <div class="input-group">
 
-                        <input type="text" name="search" value="{{ $_GET['search'] ?? '' }}" class="form-control fw-light fs-14 cstm-fs-14" placeholder="Search Vehicles">
+                        <input type="text" name="search" value="{{ $_GET['search'] ?? '' }}" class="form-control fw-light fs-14 cstm-fs-14" placeholder="Search offers by vehicle make or model">
 
                         <button class="btn btn-secondary" type="submit">
                             <i class="bi bi-search"></i>
@@ -74,9 +74,9 @@
                             <i class="bi bi-arrow-repeat"></i>
                         </a>
                         
-                        <a href="#" data-bs-target="#create-modal" data-bs-toggle="modal" class="btn btn-primary">
+                        <!-- <a href="#" data-bs-target="#create-modal" data-bs-toggle="modal" class="btn btn-primary">
                             Add Vehicle
-                        </a> 
+                        </a>  -->
                             
                     </div>
                 </form>
@@ -84,7 +84,7 @@
         </div>
 
 
-    </div>-->
+    </div>
 
     <div class="row g-2">
         <div class="col-12">
@@ -92,9 +92,11 @@
                 <table class="table align-middle table-bordered mb-0 custom-table-2">
                     <thead>
                         <tr class="py-3">
+                        
                             <th class="fw-light text-dark">vehicle</th>
                             <th class="fw-light text-dark">buyer</th>
                             <th class="fw-light text-dark">offer</th>
+                            <th class="fw-light text-dark">date</th>
                             <!--<th class="fw-light text-dark">actions</th>-->
                         </tr>
                     </thead>
@@ -105,6 +107,7 @@
                                 $imagePath = optional($data->car->images->first())->image_path
                                     ?? 'system_img/user_placeholder.jpg';
                             @endphp
+                            
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div
@@ -133,6 +136,10 @@
                             <td>
                                 <span class="text-capitalize">GHS {{ $data->offer_price }}</span><br>
                                 <small class="text-muted"></small>
+                            </td>
+                            <td>
+                                <span class="text-capitalize">{{ date("j M Y",strtotime($data->created_at)) }}</span><br>
+                                <small class="text-muted">{{ substr($data->created_at, 10 )}}</small>
                             </td>
                             <!--<td>
                                 <a href="#" class="btn btn-link  btn-md text-primary ">

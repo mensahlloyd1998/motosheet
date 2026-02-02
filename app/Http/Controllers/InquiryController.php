@@ -45,6 +45,7 @@ class InquiryController extends Controller
     */
     public function offers(Request $request)
     {
+        
         $offers = Inquiry::whereNotNull('offer_price')
             ->whereHas('car', function ($query) {
                 $query->where('user_id', auth()->user()->id);
@@ -52,6 +53,12 @@ class InquiryController extends Controller
             ->with('car')
             ->latest()
             ->get();
+
+            if ($request->has('search')) {
+                $offers = $offers->filter(function ($offer) use ($request) {
+                return stripos($offer->car->title, $request->search) !== false;
+                });
+            }
     
         return view('luno.offers.index', compact('offers'));
     }
