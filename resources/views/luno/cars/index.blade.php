@@ -74,7 +74,7 @@
                             <i class="bi bi-arrow-repeat"></i>
                         </a>
                         
-                        <a href="#" data-bs-target="#create-modal" data-bs-toggle="modal" class="btn btn-primary">
+                        <a href="{{ route('cars.create') }}" class="btn btn-primary">
                             Add Vehicle
                         </a>
                             

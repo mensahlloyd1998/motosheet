@@ -38,6 +38,11 @@ class CarController extends Controller
         return view('luno.cars.index', compact('cars'));
     }
 
+    public function create()
+    {
+        return view('luno.cars.create');
+    }
+
     public function store(Request $request)
     {
         // Validate input
