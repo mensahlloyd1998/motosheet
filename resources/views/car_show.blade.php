@@ -78,10 +78,24 @@
             <h1 class="h3">
                 {{ $car->make }} {{ $car->model }} {{ $car->trim }}
             </h1>
+            @auth
+
+                @if(auth()->user()->id == $car->user_id)
+                    <a href="{{ route('cars.qr', ['car'=>$car->id]) }}" class="btn btn-outline-secondary btn-sm rounded-pill">
+                        Print Poster
+                    </a>
+                @endif
+
+            @endauth
+
+            @guest
 
             <a href="#make-an-offer" class="btn btn-outline-secondary btn-sm rounded-pill">
                 Make Offer
             </a>
+
+            @endguest
+            
         </div>
 
         <div class="d-flex justify-content-between align-items-center">

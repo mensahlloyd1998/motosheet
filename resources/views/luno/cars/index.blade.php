@@ -92,11 +92,11 @@
                 <table class="table align-middle table-bordered mb-0 custom-table-2">
                     <thead>
                         <tr class="py-3">
-                            <th class="fw-light text-dark">vehicle</th>
-                            <th class="fw-light text-dark d-none d-lg-table-cell">page status</th>
-                            <th class="fw-light text-dark d-none d-lg-table-cell">price</th>
-                            <th class="fw-light text-dark">metrics</th>
-                            <th class="fw-light text-dark">actions</th>
+                            <th class="fw-bold text-uppercase text-dark">vehicle</th>
+                            <th class="fw-bold text-uppercase text-dark d-none d-lg-table-cell">page status</th>
+                            <th class="fw-bold text-uppercase text-dark d-none d-lg-table-cell">price</th>
+                            <th class="fw-bold text-uppercase text-dark">metrics</th>
+                            <th class="fw-bold text-uppercase text-dark">actions</th>
                         </tr>
                     </thead>
                     <tbody>

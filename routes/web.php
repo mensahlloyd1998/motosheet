@@ -122,11 +122,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cars/{car}/pay', [PaymentController::class, 'create'])
         ->name('payments.create');
 
-    Route::post('/cars/{car}/pay', [CarPaymentController::class, 'initialize'])
+    Route::post('/cars/{car}/pay', [PaymentController::class, 'initialize'])
     ->name('cars.pay');
 
-    Route::get('/payments/paystack/callback', [CarPaymentController::class, 'callback'])
+    Route::get('/payments/paystack/callback', [PaymentController::class, 'callback'])
         ->name('paystack.callback');
+
+    /*
+    |---------------------------------------------------------------------------
+    | Car Payments
+    |---------------------------------------------------------------------------
+    */
+    // Route::get('/payments', [CarPaymentController::class, 'index'])->name('payments.index');
+
+    // Route::post('/payments', [CarPaymentController::class, 'store'])->name('payments.store');
+
+    
 
     /*
     |--------------------------------------------------------------------------

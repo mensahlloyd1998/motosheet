@@ -222,7 +222,7 @@ p, li, a, span{
 }
 
 .custom-table-2 thead tr th{
-    text-transform: capitalize !important;
+    /* text-transform: capitalize !important; */
 }
 
 .text-dark{

@@ -22,6 +22,8 @@ return [
         'secret' => env('PAYSTACK_SECRET'),
     ],
 
+    'car_page_charge' => 45,
+
     'resend' => [
         'key' => env('RESEND_API_KEY'),
     ],

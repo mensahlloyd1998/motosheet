@@ -92,11 +92,13 @@
                 <table class="table align-middle table-bordered mb-0 custom-table-2">
                     <thead>
                         <tr class="py-3">
+
+                            <th class="fw-bold text-uppercase text-dark">buyer</th>
                         
-                            <th class="fw-light text-dark">vehicle</th>
-                            <th class="fw-light text-dark">buyer</th>
-                            <th class="fw-light text-dark">offer</th>
-                            <th class="fw-light text-dark">date</th>
+                            <th class="fw-bold text-uppercase text-dark">vehicle</th>
+                            
+                            <th class="fw-bold text-uppercase text-dark">offer</th>
+                            <th class="fw-bold text-uppercase text-dark">date</th>
                             <!--<th class="fw-light text-dark">actions</th>-->
                         </tr>
                     </thead>
@@ -108,6 +110,11 @@
                                     ?? 'system_img/user_placeholder.jpg';
                             @endphp
                             
+
+                            <td>
+                                <span class="text-capitalize">{{ $data->name }}</span><br>
+                                <small class="text-muted">{{ $data->phone }}</small>
+                            </td>
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div
@@ -128,10 +135,6 @@
                                         </small>
                                     </div>
                                 </div>
-                            </td>
-                            <td>
-                                <span class="text-capitalize">{{ $data->name }}</span><br>
-                                <small class="text-muted">{{ $data->phone }}</small>
                             </td>
                             <td>
                                 <span class="text-capitalize">GHS {{ $data->offer_price }}</span><br>
