@@ -43,9 +43,14 @@ ul{
 } */
 
 .container-md{
-    max-width: 1000px;
+    max-width: 1200px;
 }
+
 .fs-12{font-size:.75rem;}
+
+.main-title{
+    font-size: calc(18 / 16 * 1rem);
+}
 .badge{
     display: inline-block;
     padding: 0.45rem 0.75rem;
@@ -157,6 +162,7 @@ ul{
 
 /* Mobile: hide bullets */
 @media (max-width: 767.98px) {
+
     .marker-primary {
         list-style: none;
     }
@@ -173,5 +179,11 @@ ul{
 
     .image-grid .col-md-5 .image-wrapper {
     height: 140px;
+    }
+}
+
+@media(min-width: 767.98px){
+    .main-title{
+        font-size: calc(24 / 16 * 1rem);
     }
 }

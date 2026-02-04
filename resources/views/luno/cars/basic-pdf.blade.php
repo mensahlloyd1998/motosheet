@@ -55,7 +55,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            margin-top: 120px;
+            margin-top: 160px;
             /* margin-bottom:200px; */
         }
 
@@ -67,13 +67,42 @@
 <body>
     <div class="content">
         <img src="{{ $qr }}">
+        @php    
+
+            if(!auth()->user()->poster_contact_2){
+                $fontSize = '220px';
+            }else{
+                $fontSize = '200px';
+            }
+
+
+
+        @endphp
+        @if(auth()->user()->poster_contact_1 != null)
+
         <h1 style="
             margin-top: 0;
             margin-bottom:0;
             font-family: 'Exo2', sans-serif;
             color:rgb(198, 40, 0);
             font-weight: 900;
-            font-size: 160px;">{{ $contact }}</h1>
+            font-size: {{ $fontSize }};">{{ $contact }}</h1>
+
+        @endif
+
+        @if(auth()->user()->poster_contact_2 != null)
+
+        <h1 style="
+            margin-top: 0;
+            line-height: .5;
+            margin-bottom:0;
+            font-family: 'Exo2', sans-serif;
+            color:rgb(198, 40, 0);
+            font-weight: 900;
+            font-size: {{ $fontSize }};">{{ $contact }}</h1>
+
+        @endif
+
     </div>
     
 </body>

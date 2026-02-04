@@ -145,8 +145,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/poster', [ProfileController::class, 'poster'])->name('profile.poster');
+    Route::post('/profile/poster', [ProfileController::class, 'updatePoster'])->name('profile.updatePoster');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 
 });
 

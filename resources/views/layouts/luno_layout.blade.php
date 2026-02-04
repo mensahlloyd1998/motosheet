@@ -73,12 +73,18 @@
 
                             <li>
                                 <a class="m-link" href="{{ route('offers.index') }}">
-                                    <i class="bi bi-cash-coin fs-6"></i>
-                                    <span class="ms-2">Offers</span>
+                                    <i class="bi bi-exclamation-circle-fill fs-6"></i>
+                                    <span class="ms-2">Buyer Offers</span>
                                 </a>
                             </li>
-<!-- 
 
+                            <li>
+                                <a href="{{ route('profile.poster') }}" class="m-link">
+                                    <i class="bi bi-file-earmark-richtext-fill fs-6"></i>
+                                    <span class="ms-2">Poster Design</span>
+                                </a>    
+                            </li>
+                            <!-- 
                             <li>
                                 <a class="m-link" href="{{ route('cars.index') }}">
                                     <i class="bi bi-cash fs-6"></i>

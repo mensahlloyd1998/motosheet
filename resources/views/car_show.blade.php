@@ -60,12 +60,15 @@
 
         @if(session('success'))
             <div class="alert alert-success mb-5 fw-light" role="alert">
-                {{  session('success') }}
+                <p class="mb-0">{{  session('success') }}</p>
             </div>
         @else
+            @guest
             <div class="alert alert-warning mb-5 fw-light" role="alert">
-                Submitting an offer does not constitute a commitment to purchase. Final decisions can be made after inspection.
+                <p class="mb-0">Submitting an offer does not constitute a commitment to purchase. Final decisions can be made after inspection.
+                </p>
             </div>
+            @endguest
         @endif
 
         @if(session('warning'))
@@ -74,50 +77,43 @@
             </div>
         @endif
 
+        @auth()
+            <div class="alert alert-warning mb-5 fw-light" role="alert">
+            <p class="mb-0">Your motosheet is live and shareable.  <a href="{{ route('cars.qr', ['car'=>$car->id]) }}">Generate a sign</a> with a QR code to direct people to it instantly.</p>
+            </div>
+        @endauth
+
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="h3">
+            <h1 class="main-title">
                 {{ $car->make }} {{ $car->model }} {{ $car->trim }}
             </h1>
-            @auth
 
-                @if(auth()->user()->id == $car->user_id)
-                    <a href="{{ route('cars.qr', ['car'=>$car->id]) }}" class="btn btn-outline-secondary btn-sm rounded-pill">
-                        Print Poster
-                    </a>
-                @endif
-
-            @endauth
-
-            @guest
-
-            <a href="#make-an-offer" class="btn btn-outline-secondary btn-sm rounded-pill">
+            <a href="#make-an-offer" class=" d-none d-sm-inline-block btn btn-outline-secondary btn-sm rounded-pill">
                 Make Offer
             </a>
-
-            @endguest
             
         </div>
 
         <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex gap-2 flex-wrap">
+            <div class="d-sm-flex gap-2 flex-wrap d-none ">
                 <span class="badge text-bg-secondary">
                     <i class="bi bi-calendar-date-fill text-primary me-1"></i>
                     {{ $car->year }}
                 </span>
 
-                <span class="badge text-bg-secondary">
+                <span class="badge text-bg-secondary ">
                     <i class="bi bi-file-earmark-medical-fill text-primary me-1"></i>
                     {{ $conditionLabels[$car->condition] ?? 'Unknown' }}
                 </span>
 
-                <span class="badge text-bg-secondary d-none d-md-inline-block">
+                <span class="badge text-bg-secondary">
                     <i class="bi bi-fuel-pump-fill text-primary me-1"></i>
                     {{ ucfirst($car->fuel_type) }}
                 </span>
             </div>
 
             <p class="product-price mb-0 text-primary fw-semibold">
-                GHS {{ number_format($car->price) }}
+                GHS {{ number_format($car->price) }} <!-- <span class="text-muted fw-light fs-14 mb-2">Negotiable</span> -->
             </p>
         </div>
 
@@ -155,7 +151,7 @@
 
     {{-- Content --}}
     <div class="container-md">
-        <div class="row gx-md-5 align-items-md-start">
+        <div class="row gx-md-5 justify-content-between align-items-md-start">
 
             {{-- Left column --}}
             <div class="col-md-8">
@@ -205,7 +201,7 @@
             </div>
 
             {{-- Sidebar --}}
-            <aside class="col-md-4 mt-md-4 border rounded p-4">
+            <aside class="col-md-4 col-lg-3 mt-md-4 border rounded p-3 p-lg-2 py-lg-3">
 
                 <div class="d-flex align-items-center mb-4">
                     <div class="rounded-circle bg-light me-2" style="width:50px;height:50px;"></div>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -62,5 +63,44 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function poster(Request $request)
+    {
+        return view('luno.profile.poster');
+    }
+
+    public function updatePoster(Request $request)
+    {
+
+        // validate
+        $request->validate([
+            'poster_design'     => 'required|string|max:255',
+            'phone'             => ['required', 'regex:/^\+233\d{9}$/'],
+            'alternative_phone' => ['nullable', 'regex:/^\+233\d{9}$/'],
+        ]);        
+
+
+        // if (!preg_match('/^\+233\d{9}$/', $request->phone)) {
+        //     return Redirect::back()->withErrors(['phone' => 'Wrong phone number format']);
+        // }
+
+        // if (!preg_match('/^\+233\d{9}$/', $request->alternative_telephone)) {
+        //     return Redirect::back()->withErrors(['alternative_phone' => 'Wrong phone number format']);
+        // }
+
+        // dd($request);
+
+        // fetch user record
+        $user = User::findOrFail(auth()->user()->id);
+
+        // update user record
+        $user->poster_design = $request->poster_design;
+        $user->poster_contact_1 = $request->phone;
+        $user->poster_contact_2 = $request->alternative_phone;
+        $user->save();
+
+        //redirect
+        return redirect()->back()->with('success', 'Design Updated Successfully');
     }
 }
