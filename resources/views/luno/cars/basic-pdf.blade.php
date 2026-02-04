@@ -61,46 +61,55 @@
 
         .content img {
             width: 360px;
+            margin-bottom:60px;
         }
     </style>
 </head>
 <body>
     <div class="content">
         <img src="{{ $qr }}">
-        @php    
 
-            if(!auth()->user()->poster_contact_2){
-                $fontSize = '220px';
-            }else{
-                $fontSize = '200px';
-            }
-
-
-
+        @php
+            $fontSize = auth()->user()->poster_contact_2 ? '200px' : '220px';
         @endphp
-        @if(auth()->user()->poster_contact_1 != null)
 
-        <h1 style="
-            margin-top: 0;
-            margin-bottom:0;
-            font-family: 'Exo2', sans-serif;
-            color:rgb(198, 40, 0);
-            font-weight: 900;
-            font-size: {{ $fontSize }};">{{ $contact }}</h1>
+        @if(auth()->user()->poster_contact_1)
+            <h1 class="poster-number" style="margin-top: 0;
+                line-height: .5;
+                margin-bottom:0;
 
+                margin-top: 32px;
+                font-family: 'Exo2', sans-serif;
+                color:rgb(198, 40, 0);
+                font-weight: 900;
+                font-size: {{ $fontSize }};">
+                {{ str_replace('+233', '0', auth()->user()->poster_contact_1) }}
+            </h1>
         @endif
 
-        @if(auth()->user()->poster_contact_2 != null)
+        @if(auth()->user()->poster_contact_2)
+            <h1 class="poster-number" style="margin-top: 0;
+                line-height: .5;
+                margin-bottom:0;
+                margin-top: 16px;
+                font-family: 'Exo2', sans-serif;
+                color:rgb(198, 40, 0);
+                font-weight: 900;
+                font-size: {{ $fontSize }};">
+                {{ str_replace('+233', '0', auth()->user()->poster_contact_2) }}
+            </h1>
+        @endif
 
-        <h1 style="
-            margin-top: 0;
-            line-height: .5;
-            margin-bottom:0;
-            font-family: 'Exo2', sans-serif;
-            color:rgb(198, 40, 0);
-            font-weight: 900;
-            font-size: {{ $fontSize }};">{{ $contact }}</h1>
-
+        @if(!auth()->user()->poster_contact_1 && !auth()->user()->poster_contact_2)
+            <h1 class="poster-number" style="margin-top: 0;
+                line-height: .5;
+                margin-bottom:0;
+                font-family: 'Exo2', sans-serif;
+                color:rgb(198, 40, 0);
+                font-weight: 900;
+                font-size: {{ $fontSize }};">
+                {{ $contact }}
+            </h1>
         @endif
 
     </div>
