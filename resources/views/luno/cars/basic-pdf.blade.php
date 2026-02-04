@@ -84,7 +84,7 @@
                 font-weight: 900;
                 font-size: {{ $fontSize }};">
                 {{ str_replace('+233', '0', auth()->user()->poster_contact_1) }}
-            </h1>
+            </h1><br>
         @endif
 
         @if(auth()->user()->poster_contact_2)

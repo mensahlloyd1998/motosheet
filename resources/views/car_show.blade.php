@@ -65,7 +65,7 @@
         @else
             @guest
             <div class="alert alert-warning mb-5 fw-light" role="alert">
-                <p class="mb-0">Submitting an offer does not constitute a commitment to purchase. Final decisions can be made after inspection.
+                <p class="mb-0">Interested? <a href="#make-an-offer" class="text-primary">Make an offer</a>. <br> Submitting an offer does not constitute a commitment to purchase. Final decisions can be made after inspection.
                 </p>
             </div>
             @endguest
