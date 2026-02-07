@@ -132,7 +132,7 @@
                     <x-form-floating-field
 
                         name="price"
-                        label="Price (GHS)*"
+                        label="Price ({{ auth()->user()->country->currency_code }})*"
                         type="number"
                         col="col-md-6"
 

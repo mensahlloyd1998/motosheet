@@ -26,7 +26,7 @@
 
 @section('content')
 
-    @if(auth()->user()->phone == null)
+    @if(auth()->user()->poster_contact_1 == null)
         <div class="row">
             <div class="col-12">
                 <div class="alert alert-warning mb-2">

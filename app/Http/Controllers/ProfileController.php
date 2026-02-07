@@ -32,7 +32,11 @@ class ProfileController extends Controller
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
-        if (!preg_match('/^\+233\d{9}$/', $request->phone)) {
+        $phone_code = '+'.auth()->user()->country->phone_code; 
+
+        $phoneRegex = '/^' . preg_quote($phone_code, '/') . '\d{9}$/';
+
+        if (!preg_match($phoneRegex, $request->phone)) {
             return Redirect::back()->withErrors(['phone' => 'Wrong phone number format']);
         }
 
@@ -73,12 +77,20 @@ class ProfileController extends Controller
     public function updatePoster(Request $request)
     {
 
+
+        $phone_code = '+'.auth()->user()->country->phone_code; 
+
+        $phoneRegex = '/^' . preg_quote($phone_code, '/') . '\d{9}$/';
+
         // validate
         $request->validate([
             'poster_design'     => 'required|string|max:255',
-            'phone'             => ['required', 'regex:/^\+233\d{9}$/'],
-            'alternative_phone' => ['nullable', 'regex:/^\+233\d{9}$/'],
+            'phone'             => ['required', 'regex:'.$phoneRegex],
+            'alternative_phone' => ['nullable', 'regex:'.$phoneRegex],
         ]);        
+
+
+
 
 
         // if (!preg_match('/^\+233\d{9}$/', $request->phone)) {

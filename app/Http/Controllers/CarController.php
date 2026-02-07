@@ -353,7 +353,7 @@ class CarController extends Controller
         $pdf = Pdf::loadView('luno.cars.basic-pdf', [
             'qr'  => storage_path("app/public/{$qrPath}"),
             'url' => $url,
-            'contact' => auth()->user()->phone ? str_replace('+233', '0', auth()->user()->phone) : null
+            'contact' => auth()->user()->phone ? str_replace('+'.auth()->user()->country->phone_code, '0', auth()->user()->phone) : null
         ]);
 
         

@@ -82,7 +82,7 @@ p, li, a, span{
 }
 .form-control{
     font-size: .875rem;
-    font-weight: 300;
+    font-weight: 300 !important;
 }
 
 .app-demo .demo-text {

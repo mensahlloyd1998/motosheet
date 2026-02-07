@@ -113,7 +113,7 @@
             </div>
 
             <p class="product-price mb-0 text-primary fw-semibold">
-                GHS {{ number_format($car->price) }} <!-- <span class="text-muted fw-light fs-14 mb-2">Negotiable</span> -->
+                {{ $car->user->country->currency_code}} {{ number_format($car->price) }} <!-- <span class="text-muted fw-light fs-14 mb-2">Negotiable</span> -->
             </p>
         </div>
 
@@ -243,7 +243,7 @@
                                         type="text"
                                         name="phone"
                                         class="form-control"
-                                        value="{{ old('phone') ?? '+233' }}"
+                                        value="{{ old('phone') ?? '+'.$car->user->country->phone_code }}"
                                         placeholder="Phone Number">
                                     <label>Phone Number *</label>
                                 </div>

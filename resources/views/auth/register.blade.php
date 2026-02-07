@@ -38,6 +38,21 @@
           <p class="text-danger mb-0">{{ $message }}</p>
           @enderror
       </div>
+      <div class="col-12">
+        <div class="form-floating mb-0">
+          <select name="country" class="form-control" id="country">
+            <option value=""></option>
+            @foreach($countries as $data)
+              <option value="{{ $data->id }}">{{ $data->country_name }}</option>
+            @endforeach
+
+          </select>
+          <label for="">Country</label>
+        </div>
+        @error('country')
+          <p class="text-danger mb-0">{{ $message }}</p>
+          @enderror
+      </div>
 
       <div class="col-12">
           <div class="form-floating mb-0">

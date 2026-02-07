@@ -82,7 +82,7 @@
                                     <div class="row mb-3">
                                         <label class="col-md-3 col-sm-4 col-form-label">Contact Phone *</label>
                                         <div class="col-md-9 col-sm-8">
-                                            <input type="text" class="form-control form-control-lg" name="phone" placeholder="+233 26 331 9480" value="{{ auth()->user()->phone }}">
+                                            <input type="text" class="form-control form-control-lg" name="phone" placeholder="+233 26 331 9480" value="{{ auth()->user()->phone ?? '+'.auth()->user()->country->phone_code}}">
                                             @error('phone') <p class="mb-0 text-danger">{{ $message }}</p> @enderror
                                         </div>
                                     </div>

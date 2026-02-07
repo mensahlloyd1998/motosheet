@@ -137,7 +137,7 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="text-capitalize">GHS {{ $data->offer_price }}</span><br>
+                                <span class="text-capitalize">{{ auth()->user()->country->currency_code }} {{ $data->offer_price }}</span><br>
                                 <small class="text-muted"></small>
                             </td>
                             <td>
@@ -162,7 +162,6 @@
                         0 Offers Found
                     </p>
                 </div>
-                
             </div>
         @endif
     </div>

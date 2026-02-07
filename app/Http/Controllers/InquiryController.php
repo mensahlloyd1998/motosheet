@@ -20,9 +20,15 @@ class InquiryController extends Controller
             'offer' => 'numeric|required'
         ]);
 
-        if (!preg_match('/^\+233\d{9}$/', $request->phone)) {
+        $phone_code = '+'.auth()->user()->country->phone_code; // eg; +233
+
+        if (!preg_match('/^' . preg_quote($phone_code, '/') . '\d{9}$/', $request->phone)) {
             return back()->withErrors(['phone' => 'Wrong phone number format']);
         }
+
+        // if (!preg_match('/^\+233\d{9}$/', $request->phone)) {
+        //     return back()->withErrors(['phone' => 'Wrong phone number format']);
+        // }
 
         // Store
 

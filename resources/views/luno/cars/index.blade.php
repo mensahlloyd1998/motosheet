@@ -25,7 +25,7 @@
 @section('content')
 
 
-    @if(auth()->user()->phone == null)
+    @if(auth()->user()->poster_contact_1 == null)
         <div class="row">
             <div class="col-12">
                 <div class="alert alert-warning mb-2">
@@ -133,7 +133,7 @@
                                 <!-- <small class="text-muted"></small> -->
                             </td>
                             <td class="d-none d-lg-table-cell">
-                                <span>GHS {{ $data->price}}</span><br>
+                                <span>{{  $data->user->country->currency_code }} {{ $data->price}}</span><br>
                                 <!-- <small class="text-muted">Negotiable</small> -->
                             </td>
                             <td>
