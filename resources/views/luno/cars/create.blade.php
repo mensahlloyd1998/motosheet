@@ -17,10 +17,10 @@
 @endsection
 
 @section('page_details')
-    <div class="col-auto cstm-page-info">
-      <h1 class=" mt-1 mb-0">Add New Vehicle</h1>
-      <p class="text-muted">Enter the details of a vehicle  to generate a clean, shareable page instantly.</p>
-    </div>
+    <x-page-details 
+        title="add new vehicle"
+        description="Enter the details of a vehicle  to generate a clean, shareable page instantly."
+    />
 @endsection
 
 

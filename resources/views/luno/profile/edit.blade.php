@@ -16,10 +16,10 @@
 @endsection
 
 @section('page_details')
-    <div class="col-auto cstm-page-info">
-      <h1 class=" mt-1 mb-0">User Account Settings</h1>
-      <p class="text-muted">Edit profile/account information.</p>
-    </div>
+    <x-page-details 
+        title="user account settings" 
+        description="Edit profile/account information."
+    />
 @endsection
 
 @section('content')
@@ -86,6 +86,16 @@
                                             @error('phone') <p class="mb-0 text-danger">{{ $message }}</p> @enderror
                                         </div>
                                     </div>
+
+                                    <div class="row mb-3">
+                                        <label class="col-md-3 col-sm-4 col-form-label">Country *</label>
+                                        <div class="col-md-9 col-sm-8">
+                                            <select name="country" id="" class="form-control form-control-lg">
+                                                <option value=""></option>
+                                            </select>
+                                            @error('country') <p class="mb-0 text-danger">{{ $message }}</p> @enderror
+                                        </div>
+                                    </div>
                                     <!-- <div class="row mb-3">
                                         <label class="col-md-3 col-sm-4 col-form-label">Company Site</label>
                                         <div class="col-md-9 col-sm-8">
@@ -135,7 +145,7 @@
                     </div>
                     <div id="list-item-2" class="card fieldset border border-muted mt-5">
                             <!-- form: Change Password -->
-                            <!-- <span class="fieldset-tile text-muted bg-body">Change Password</span> -->
+                            <span class="fieldset-tile text-muted bg-body">Change Password</span>
                             <div class="card">
                                 <div class="card-body border-0">
                                     <form method="post" id="password-update-form" action="{{ route('password.update') }}" autocomplete="off">
@@ -160,8 +170,8 @@
                                 </div>
                             </div>
                             <div class="card-footer text-end">
-                                <button class="btn btn-lg btn-light me-2" type="reset">Discard</button>
-                                <button class="btn btn-lg btn-primary" type="submit" onclick="document.getElementById('password-update-form').submit();">Save Changes</button>
+                                <button class="btn  btn-light me-2" type="reset">Discard</button>
+                                <button class="btn  btn-primary" type="submit" onclick="document.getElementById('password-update-form').submit();">Save Changes</button>
                             </div>
                         </div>
                     </div>

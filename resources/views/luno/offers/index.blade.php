@@ -16,10 +16,10 @@
 @endsection
 
 @section('page_details')
-    <div class="col-auto cstm-page-info">
-      <h1 class=" mt-1 mb-0">Offers</h1>
-      <p class="text-muted">A complete list of offers made on your vehicle listings. <br> Use the search field to filter offers by vehicle make or model</p>
-    </div>
+    <x-page-details 
+        title="buyer offers" 
+        description="A complete list of offers made on your vehicle listings. <br> Use the search field to filter offers by vehicle make or model"
+    />
 @endsection
 
 @section('content')

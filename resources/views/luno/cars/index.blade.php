@@ -16,10 +16,10 @@
 @endsection
 
 @section('page_details')
-    <div class="col-auto cstm-page-info">
-      <h1 class=" mt-1 mb-0">Vehicles</h1>
-      <p class="text-muted">Manage your vehicle listings, track offers and controller visibility.</p>
-    </div>
+    <x-page-details 
+        title="vehicles"
+        description="Manage your vehicle listings, track offers and controller visibility."
+    />
 @endsection
 
 @section('content')

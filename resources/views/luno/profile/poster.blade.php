@@ -16,11 +16,7 @@
 @endsection
 
 @section('page_details')
-    <div class="col-auto cstm-page-info">
-        <h1 class="mt-1 mb-0">Poster Configuration</h1>
-        <p class="text-muted">Customize the look and details of your “for sale” signage.</p>
-
-    </div>
+    <x-page-details title="poster configuration" description="Customize the look and details of your “for sale” signage."/>
 @endsection
 
 

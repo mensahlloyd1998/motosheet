@@ -16,12 +16,10 @@
 @endsection
 
 @section('page_details')
-   <div class="col-auto cstm-page-info">
-      <h1 class="mt-1 mb-0">Dashboard</h1>
-      <p class="text-muted">
-         A quick overview of your vehicle listings, visibility, and activity on Motosheet.
-      </p>
-   </div>
+   <x-page-details 
+      title="Dashboard"
+      description="A quick overview of your vehicle listings, visibility, and activity on Motosheet."
+   />
 @endsection
 
 

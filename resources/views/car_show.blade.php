@@ -12,7 +12,7 @@
     <link rel="icon" href="{{ asset('system_img/motosheet-favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('front-assets/css/styles.css') }}">
 
-    <title>{{ $car->make }} {{ $car->model }} {{ $car->trim }}</title>
+    <title>{{ $car->make }} {{ $car->model }} {{ $car->trim }} for sale</title>
 </head>
 
 @php
