@@ -121,7 +121,7 @@
                                         ">
                                     </div>
                                     <div>
-                                        <span class="fw-normal"><a href="{{ route('cars.public.show', ['car'=> $data->slug]) }}" class="table-row-title">{{$data->title}}</a></span><br>
+                                        <span class="fw-normal"><a href="{{ route('cars.show', ['car'=> $data->id]) }}" class="table-row-title">{{$data->title}}</a></span><br>
                                         <small class="text-muted">
                                             {{ $data->created_at->format('M d, Y') }}
                                         </small>
@@ -888,7 +888,22 @@
                 },
                 success: function(res){
                     if (res.authorization_url) {
+                        // Paid flow
                         window.location.href = res.authorization_url;
+                    } else if (res.message) {
+                        // Free listing flow
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: res.message,
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+
+                        // Refresh list so status updates
+                        setTimeout(() => {
+                            location.reload();
+                        }, 2000);
                     }
                 },
                 error: function (xhr){
@@ -900,6 +915,7 @@
                 }
             });
         }
+
 
 
         function deactivate(carId){

@@ -21,10 +21,23 @@ class PaymentController extends Controller
                 'message' => 'This car is already paid for.'
             ], 409);
         }
+
+        if(env('ALLOW_FREE_LISTINGS') == true){
+            $car->is_paid = true;
+            $car->status = 'active';
+            $car->payment_reference = 'activated_without_charge';
+            $car->save();
+
+            return response()->json([
+                'message' => 'Vehicle listing activated successfully'
+            ], 200);
+            exit();
+
+        }
     
         $reference = 'CAR_' . $car->id . '_' . Str::uuid();
     
-        $amount = config('services.car_page_charge') * 100; // pesewas
+        $amount = config('services.car_page_charge') * 100;
     
         $response = Http::withToken(config('services.paystack.secret'))
             ->post('https://api.paystack.co/transaction/initialize', [

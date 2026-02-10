@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Models\CarImage;
+use App\Models\Inquiry;
+use App\Models\PageView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Rule;
+use Carbon\Carbon;
 
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -36,6 +39,43 @@ class CarController extends Controller
         ->get();
 
         return view('luno.cars.index', compact('cars'));
+    }
+
+    public function show($car_id)
+    {
+        $car = Car::findOrFail($car_id);
+
+        abort_if($car->user_id !== auth()->id(), 403);
+
+        $months = collect(range(0, 11))
+        ->map(fn ($i) => Carbon::now()->subMonths($i)->format('Y-m'))
+        ->reverse()
+        ->values();
+
+        $offers = Inquiry::select(
+            DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"),
+            DB::raw('COUNT(*) as total')
+        )
+        ->where('car_id', $car->id)
+        ->groupBy('month')
+        ->pluck('total', 'month');
+
+
+    $views = PageView::select(
+        DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"),
+        DB::raw('COUNT(*) as total')
+    )
+    ->where('car_id', $car->id)
+    ->groupBy('month')
+    ->pluck('total', 'month');
+
+        return view('luno.cars.show', [
+            'car'=>$car,
+            'months' => $months,
+            'offersData' => $months->map(fn ($m) => $offers[$m] ?? 0),
+            'viewsData' => $months->map(fn ($m) => $views[$m] ?? 0),
+            'monthLabels' => $months->map(fn ($m) => Carbon::createFromFormat('Y-m', $m)->format('M')),
+        ]);
     }
 
     public function create()
