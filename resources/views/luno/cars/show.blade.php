@@ -32,7 +32,7 @@
             <div class="d-flex align-items-md-start align-items-center flex-column flex-md-row">
                 <img src="{{ asset('/img/profile_av.png') }}" alt="" class="rounded-4">
                 <div class="media-body ms-md-5 m-0 mt-4 mt-md-0 text-md-start text-center">
-                <h4 class="mb-1 fw-light">{{$car->make}} {{$car->model}} {{$car->trim}}<a href="#" class="fa fa-pencil-square-o fs-6 ms-2" data-bs-toggle="offcanvas" data-bs-target="#edit_profile" title="Edit Profile"></a></h4>
+                <h4 class="mb-1 fw-light">{{$car->make}} {{$car->model}} {{$car->trim}}<a href="#" onclick="copyText()" class="bi bi-copy fs-6 ms-2"title="Copy Listing URL"></a></h4>
                 <p>Added on {{ $car->created_at->format('M d, Y') }} &#8226; 
                     <span class="text-capitalize {{ $car->status == 'active'? 'text-success': 'text-warning' }}">
                         {{ $car->status }}
@@ -42,7 +42,7 @@
                         {{ $car->user->country->currency_code }} {{ $car->price }}
                     </span>
                 </p>
-                <!-- <span class="text-muted">It is a long established fact that a reader will be distracted by the readable<br> content of a page when looking at its layout.</span> -->
+                <span class="text-muted d-none" id="textToCopy">{{ route('cars.public.show', ['car'=>$car->slug]) }}</span>
                 <div class="d-flex flex-row flex-wrap align-items-center justify-content-center justify-content-md-start">
                     <div class="card py-2 px-3 me-2 mt-2">
                         <small class="text-muted">Year Model</small>
@@ -148,6 +148,19 @@
 
     <!-- Plugin Js -->
     <script src="{{ asset('/js/bundle/apexcharts.bundle.js') }}"></script>
+    <script>
+        function copyText() {
+            const text = document.getElementById("textToCopy").innerText.trim();
+
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    alert("Copied to clipboard!");
+                })
+                .catch(err => {
+                    console.error("Failed to copy: ", err);
+                });
+        }
+    </script>
     <script>
         const offersData = @json($offersData);
         const viewsData  = @json($viewsData);
