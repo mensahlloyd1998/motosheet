@@ -172,10 +172,11 @@
 
                                 @endif
 
-
+                                <!-- 
                                 <a href="{{ route('cars.qr', ['car'=>$data->id]) }}" class="btn btn-link  btn-md text-secondary" title="Download Sale Poster">
                                     <i class=" fs-6 bi bi-image"></i>
-                                </a>
+                                </a> 
+                                -->
 
                                 <a href="#" class="btn btn-link  btn-md text-primary " onclick="show_edit_form({{ $data->id }})">
                                     <i class="bi bi-pencil-square fs-6"></i>

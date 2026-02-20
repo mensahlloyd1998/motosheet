@@ -25,18 +25,22 @@
 
 @section('content')
 
+@php
+    $imagePath = optional($car->images->first())->image_path ?? 'system_img/user_placeholder.jpg';
+@endphp
+
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body border-bottom">
             <div class="d-flex align-items-md-start align-items-center flex-column flex-md-row">
-                <img src="{{ asset('/img/profile_av.png') }}" alt="" class="rounded-4">
+                <img style="height:200px;width:200px;" src="{{ asset('storage/'.$imagePath) }}" alt="" class="rounded-4">
                 <div class="media-body ms-md-5 m-0 mt-4 mt-md-0 text-md-start text-center">
                 <h4 class="mb-1 fw-light">{{$car->make}} {{$car->model}} {{$car->trim}}<a href="#" onclick="copyText()" class="bi bi-copy fs-6 ms-2"title="Copy Listing URL"></a></h4>
                 <p>Added on {{ $car->created_at->format('M d, Y') }} &#8226; 
                     <span class="text-capitalize {{ $car->status == 'active'? 'text-success': 'text-warning' }}">
                         {{ $car->status }}
-                    </span> 
+                    </span>
                     &#8226; 
                     <span>
                         {{ $car->user->country->currency_code }} {{ $car->price }}
