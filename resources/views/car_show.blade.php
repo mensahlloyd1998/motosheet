@@ -65,7 +65,7 @@
         @else
             @guest
             <div class="alert alert-warning mb-5 fw-light" role="alert">
-                <p class="mb-0">Interested? <a href="#make-an-offer" class="text-primary">Make an offer</a>. <br> Submitting an offer does not constitute a commitment to purchase. Final decisions can be made after inspection.
+                <p class="mb-0"><!--Interested? <a href="#make-an-offer" class="text-primary">Make an offer</a>. <br>--> Submitting an offer does not constitute a commitment to purchase. Final decisions can be made after inspection.
                 </p>
             </div>
             @endguest
@@ -88,8 +88,8 @@
                 {{ $car->make }} {{ $car->model }} {{ $car->trim }}
             </h1>
 
-            <a href="#make-an-offer" class=" d-none d-sm-inline-block btn btn-outline-secondary btn-sm rounded-pill">
-                Make Offer
+            <a href="#make-an-offer" class=" d-none d-sm-inline-block btn btn-primary btn-sm">
+                Make an Offer
             </a>
             
         </div>
@@ -112,9 +112,9 @@
                 </span>
             </div>
 
-            <p class="product-price mb-0 text-primary fw-semibold">
-                {{ $car->user->country->currency_code}} {{ number_format($car->price) }} <!-- <span class="text-muted fw-light fs-14 mb-2">Negotiable</span> -->
-            </p>
+            <!--<p class="product-price mb-0 text-primary fw-semibold">
+                {{ $car->user->country->currency_code}} {{ number_format($car->price) }}
+            </p>-->
         </div>
 
         {{-- Image Grid --}}

@@ -229,6 +229,8 @@
                             data-height="140"
                             data-allowed-file-extensions="jpg jpeg png webp"
                             multiple>
+
+                        @error('images') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
                     </div>
 
 
