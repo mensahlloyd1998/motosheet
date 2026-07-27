@@ -19,6 +19,6 @@ class PublicCarController extends Controller
             'user_agent'=> $request->userAgent(),
         ]);
 
-        return view('car_show', ['car' => $car]);
+        return view('car-listing', ['car' => $car]);
     }
 }
