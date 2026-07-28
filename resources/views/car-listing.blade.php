@@ -81,7 +81,7 @@
   @media(max-width:860px){ .plate-grid{grid-template-columns:repeat(2,1fr);} }
   @media(max-width:480px){ .plate-grid{grid-template-columns:1fr;} }
 
-  .features-section{padding:64px 0;}
+  .features-section{padding:64px 20px; margin: 0 auto;}
   .features-list{display:grid;grid-template-columns:repeat(2,1fr);column-gap:40px;row-gap:0;margin-top:8px;}
   @media(max-width:640px){ .features-list{grid-template-columns:1fr;} }
   .feature-item{display:flex;align-items:flex-start;gap:12px;font-size:14px;padding:14px 0;border-bottom:1px solid var(--line);}

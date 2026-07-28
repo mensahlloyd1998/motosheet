@@ -38,7 +38,7 @@ class CarController extends Controller
         ->orderByDesc('id')
         ->get();
 
-        return view('luno.cars.index', compact('cars'));
+        return view('modern.cars.index', compact('cars'));
     }
 
     public function show($car_id)
