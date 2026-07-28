@@ -231,6 +231,7 @@
                             multiple>
 
                         @error('images') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
+                        @error('images.*') <p class="fs-12 text-danger">{{ $message }}</p> @enderror
                     </div>
 
 

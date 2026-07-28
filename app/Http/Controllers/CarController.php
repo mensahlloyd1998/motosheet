@@ -102,7 +102,7 @@ class CarController extends Controller
 
             // Require images array with at least 5 files
             'images'         => ['required', 'array', 'min:5'],
-            'images.*'       => ['image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'images.*'       => ['image', 'mimes:jpg,jpeg,png,webp', 'max:12096'],
             'features'   => 'nullable|array',
             'features.*' => 'nullable|string|max:255',
         
