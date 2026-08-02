@@ -80,7 +80,7 @@ class CarController extends Controller
 
     public function create()
     {
-        return view('luno.cars.create');
+        return view('modern.cars.create');
     }
 
     public function store(Request $request)
