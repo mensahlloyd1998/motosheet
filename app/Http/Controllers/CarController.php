@@ -167,6 +167,13 @@ class CarController extends Controller
             ->with('success', 'Car page created successfully.');
     }
 
+    public function edit(Car $car)
+    {
+        abort_if($car->user_id !== auth()->id(), 403);
+        $car->load('images');
+        return view('modern.cars.edit', compact('car'));
+    }
+
     public function update(Request $request, Car $car)
     {
         $validated = $request->validate([
