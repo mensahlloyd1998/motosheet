@@ -29,11 +29,24 @@
   button{font-family:inherit;cursor:pointer;}
   img{max-width:100%;display:block;}
   :focus-visible{outline:2px solid var(--orange);outline-offset:3px;}
-  .wrap{max-width:1240px;margin:0 auto;padding:0 32px;}
+  /* .wrap{max-width:1240px;margin:0 auto;padding:0 32px;} */
+  .wrap{max-width:1280px; margin:0 auto;padding:0 32px;}
+  @media(min-width:1280px){
+    .wrap{min-width:1240px;}
+  }
+  
 
   /* header (shared) */
-  header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);z-index:100;}
+  /* header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);z-index:100;}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1240px;margin:0 auto;gap:24px;}
+  .nav img.brand{height:24px;width:auto;}
+  .nav-tabs{display:flex;gap:6px;margin-right:auto;margin-left:36px;}
+  .nav-tabs a{font-size:13.5px;font-weight:600;color:var(--text-muted);padding:8px 14px;border-radius:100px;}
+  .nav-tabs a.active{background:var(--paper);color:var(--black);}
+  .nav-tabs a:hover{color:var(--black);}
+  @media(max-width:760px){ .nav-tabs{display:none;} } */
+  header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);z-index:100;}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1280px;margin:0 auto;gap:24px;}
   .nav img.brand{height:24px;width:auto;}
   .nav-tabs{display:flex;gap:6px;margin-right:auto;margin-left:36px;}
   .nav-tabs a{font-size:13.5px;font-weight:600;color:var(--text-muted);padding:8px 14px;border-radius:100px;}
@@ -145,11 +158,13 @@
         <a href="/">
             <img src="{{ asset('system_img/motosheet-logo.png') }}" class="brand" alt="Motosheet logo">
         </a>
+
         <div class="nav-tabs">
             <a href="{{ route('dashboard') }}" class="active">Dashboard</a>
             <a href="{{ route('cars.index') }}">My Listings</a>
             <a href="{{ route('offers.index') }}">Offers</a>
         </div>
+
         <div class="user-menu">
             <button class="user-btn" id="userMenuBtn">
                 <span class="user-avatar">{{ strtoupper(substr(auth()->user()->name ?? 'U', 0, 1)) }}</span>
@@ -187,7 +202,7 @@
         $months, $viewsData, $offersData, $monthLabels                (account-wide, same shape as cars.show)
     --}}
 
-    <div class="page-head">
+    <div class="page-head" style="">
         <div>
             <div class="eyebrow">Overview</div>
             <h1>Welcome back, {{ explode(' ', auth()->user()->name ?? 'there')[0] }}</h1>
