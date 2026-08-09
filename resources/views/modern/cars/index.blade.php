@@ -78,7 +78,7 @@
   .page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:40px 0 28px;flex-wrap:wrap;}
   .page-head .eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--orange-deep);margin-bottom:10px;}
   .page-head h1{font-size:clamp(26px,3.2vw,36px);font-weight:800;letter-spacing:-0.02em;}
-  .page-head .sub{font-size:14.5px;color:var(--text-muted);margin-top:6px;}
+  .page-head .sub{font-weight:300;font-size:14.5px;color:var(--black);margin-top:6px;}
 
   .cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;font-weight:700;font-size:14px;padding:12px 20px;border-radius:var(--radius);border:none;white-space:nowrap;transition:background .2s ease;}
   .cta-btn:hover{background:var(--orange-deep);}
@@ -292,7 +292,7 @@
                             </td>
                             <td>{{ $fuelLabels[$car->fuel_type] ?? ucfirst($car->fuel_type) }}</td>
                             <td>
-                                @php $offersCount = $car->inquiries_count ?? 0; @endphp
+                                @php $offersCount = $car->inquiries()->count() ?? 0; @endphp
                                 <span class="offers-count {{ $offersCount > 0 ? 'has-offers' : '' }}">{{ $offersCount }}</span>
                             </td>
                             <td>
@@ -341,7 +341,7 @@
         {{-- Cards (mobile) --}}
         <div class="car-cards" id="carsCardsList">
             @foreach($cars as $car)
-                @php $thumb = $car->images->first(); $offersCount = $car->inquiries_count ?? 0; @endphp
+                @php $thumb = $car->images->first(); $offersCount = $car->inquiries()->count(); @endphp
                 <div class="car-card" data-row-id="{{ $car->id }}">
                     @if($thumb)
                         <img class="car-thumb" src="{{ asset('storage/'.$thumb->image_path) }}" alt="">

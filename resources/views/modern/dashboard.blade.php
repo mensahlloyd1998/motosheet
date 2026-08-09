@@ -29,7 +29,6 @@
   button{font-family:inherit;cursor:pointer;}
   img{max-width:100%;display:block;}
   :focus-visible{outline:2px solid var(--orange);outline-offset:3px;}
-  /* .wrap{max-width:1240px;margin:0 auto;padding:0 32px;} */
   .wrap{max-width:1280px; margin:0 auto;padding:0 32px;}
   @media(min-width:1280px){
     .wrap{min-width:1240px;}

@@ -66,6 +66,6 @@ class InquiryController extends Controller
                 });
             }
     
-        return view('luno.offers.index', compact('offers'));
+        return view('modern.offers.index', compact('offers'));
     }
 }

@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,7 +12,7 @@
 <link rel="icon" href="{{ asset('system_img/motosheet-favicon.png') }}" type="image/x-icon">
 
 <title>{{ $car->make }} {{ $car->model }} {{ $car->trim }} for sale</title>
-<meta name="description" content="{{ $car->year }} {{ $car->make }} {{ $car->model }} {{ $car->trim }} for sale. {{ $conditionLabels[$car->condition] ?? 'Unknown' }}, {{ ucfirst($car->fuel_type) }}, {{ $car->mileage }} mi.">
+<meta name="description" content="{{ $car->year }} {{ $car->make }} {{ $car->model }} {{ $car->trim }} for sale.">
 
 <style>
   :root{
@@ -137,6 +139,14 @@
 </header>
 
 <main class="wrap">
+
+    @php 
+        $conditionLabels = [
+            'new' => 'New',
+            'foreign_used' => 'Foreign Used',
+            'used' => 'Used'
+        ]
+    @endphp
 
     @if($errors->any())
         <div class="alert alert-danger">
