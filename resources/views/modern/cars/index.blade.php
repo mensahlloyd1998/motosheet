@@ -59,20 +59,10 @@
   .user-dropdown form{margin:0;}
   .user-dropdown hr{border:none;border-top:1px solid var(--line);}
 
-  /* alerts + toast */
+  /* alerts */
   .alert{border-radius:var(--radius);padding:14px 16px;font-size:13.5px;margin:24px 0 0;font-weight:500;}
   .alert-danger{background:#fdece7;color:#a3320f;border:1px solid #f3c7b8;}
   .alert-success{background:#eef7ee;color:#2d6a30;border:1px solid #c9e4c9;}
-  #toast{
-    position:fixed;top:20px;right:20px;z-index:1000;display:flex;flex-direction:column;gap:10px;
-  }
-  #toast .toast-item{
-    min-width:260px;max-width:340px;padding:13px 16px;border-radius:6px;font-size:13.5px;font-weight:500;
-    box-shadow:0 8px 24px rgba(13,13,13,0.12);animation:slideIn .2s ease;
-  }
-  .toast-item.ok{background:#eef7ee;color:#2d6a30;border:1px solid #c9e4c9;}
-  .toast-item.err{background:#fdece7;color:#a3320f;border:1px solid #f3c7b8;}
-  @keyframes slideIn{ from{opacity:0;transform:translateX(12px);} to{opacity:1;transform:translateX(0);} }
 
   /* page head */
   .page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:40px 0 28px;flex-wrap:wrap;}
@@ -297,12 +287,9 @@
                             </td>
                             <td>
                                 <div class="status-select-wrap">
-                                    {{-- /cars/{car}/status is registered without a route name, so we build the URL directly --}}
                                     <select class="status-select status-{{ $car->status }}"
                                             data-car-id="{{ $car->id }}"
-                                            data-current="{{ $car->status }}"
-                                            data-url="{{ url('/cars/'.$car->id.'/status') }}"
-                                            data-pay-url="{{ route('payments.create', ['car' => $car->id]) }}">
+                                            data-current="{{ $car->status }}">
                                         <option value="draft"   @selected($car->status === 'draft')>Draft</option>
                                         <option value="active"  @selected($car->status === 'active')>Active</option>
                                         <option value="paused"  @selected($car->status === 'paused')>Paused</option>
@@ -357,9 +344,7 @@
                             <div class="status-select-wrap">
                                 <select class="status-select status-{{ $car->status }}"
                                         data-car-id="{{ $car->id }}"
-                                        data-current="{{ $car->status }}"
-                                        data-url="{{ url('/cars/'.$car->id.'/status') }}"
-                                        data-pay-url="{{ route('payments.create', ['car' => $car->id]) }}">
+                                        data-current="{{ $car->status }}">
                                     <option value="draft"   @selected($car->status === 'draft')>Draft</option>
                                     <option value="active"  @selected($car->status === 'active')>Active</option>
                                     <option value="paused"  @selected($car->status === 'paused')>Paused</option>
@@ -406,8 +391,8 @@
     &copy; {{ date('Y') }} Motosheet. Beautiful single-page listings for cars.
 </footer>
 
-<div id="toast"></div>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     // ---------- user dropdown ----------
     const menuBtn = document.getElementById('userMenuBtn');
@@ -415,80 +400,185 @@
     menuBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('show'); });
     document.addEventListener('click', () => dropdown.classList.remove('show'));
 
-    // ---------- toast helper ----------
-    function showToast(message, isError = false) {
-        const box = document.getElementById('toast');
-        const item = document.createElement('div');
-        item.className = 'toast-item ' + (isError ? 'err' : 'ok');
-        item.textContent = message;
-        box.appendChild(item);
-        setTimeout(() => item.remove(), 4000);
+    const csrfToken = "{{ csrf_token() }}";
+
+    // ---------- activate / deactivate / reactivate / setStatus ----------
+    function activate(carId, selectEl){
+        $.ajax({
+            url: `/cars/${carId}/pay`,
+            type: 'POST',
+            data: {
+                _token: csrfToken
+            },
+            success: function(res){
+                if (res.authorization_url) {
+                    // Paid flow
+                    window.location.href = res.authorization_url;
+                } else if (res.message) {
+                    // Free listing flow
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: res.message,
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                }
+            },
+            error: function (xhr){
+                if (selectEl) selectEl.value = selectEl.dataset.current;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: xhr.responseJSON?.message || 'An error occurred'
+                });
+            }
+        });
     }
 
-    const csrfToken = '{{ csrf_token() }}';
-
-    // ---------- delete (destroy() returns JSON, not a redirect) ----------
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', async () => {
-            if (!confirm('Delete this listing? This cannot be undone.')) return;
-            try {
-                const res = await fetch(btn.dataset.url, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken,
-                        'Accept': 'application/json',
-                    },
+    function deactivate(carId, selectEl){
+        $.ajax({
+            url: `/cars/${carId}/status`,
+            type: 'POST',
+            data: {
+                _token: csrfToken,
+                status: 'paused'
+            },
+            success: function(res){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: res.message || 'Car Page Status Updated'
                 });
-                if (res.ok) {
-                    document.querySelectorAll(`[data-row-id="${btn.dataset.carId}"]`).forEach(el => el.remove());
-                    showToast('Vehicle deleted successfully.');
-                } else {
-                    showToast('Could not delete this listing.', true);
-                }
-            } catch (e) {
-                showToast('Network error — please try again.', true);
+                location.reload();
+            },
+            error: function (xhr){
+                if (selectEl) selectEl.value = selectEl.dataset.current;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: xhr.responseJSON?.message || 'An error occurred'
+                });
             }
         });
-    });
+    }
 
-    // ---------- status change (draft -> active can require payment, returns 402) ----------
-    document.querySelectorAll('.status-select').forEach(select => {
-        select.addEventListener('change', async () => {
-            const previous = select.dataset.current;
-            const next = select.value;
-
-            try {
-                const res = await fetch(select.dataset.url, {
-                    method: 'POST', // /cars/{car}/status is registered as POST, not PATCH
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken,
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ status: next }),
+    function reactivate(carId, selectEl){
+        $.ajax({
+            url: `/cars/${carId}/status`,
+            type: 'POST',
+            data: {
+                _token: csrfToken,
+                status: 'active'
+            },
+            success: function(res){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: res.message || 'Car Page Status Updated'
                 });
-
-                if (res.ok) {
-                    select.dataset.current = next;
-                    select.classList.remove('status-' + previous);
-                    select.classList.add('status-' + next);
-                    showToast('Listing status updated.');
-                } else if (res.status === 402) {
-                    // Payment required to move draft -> active — send them to the real payment page
-                    select.value = previous;
-                    showToast('Redirecting you to payment to activate this listing…', true);
-                    window.location = select.dataset.payUrl;
-                } else {
-                    select.value = previous;
-                    showToast('That status change isn\'t allowed.', true);
-                }
-            } catch (e) {
-                select.value = previous;
-                showToast('Network error — please try again.', true);
+                location.reload();
+            },
+            error: function (xhr){
+                if (selectEl) selectEl.value = selectEl.dataset.current;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: xhr.responseJSON?.message || 'An error occurred'
+                });
             }
         });
+    }
+
+    // Fallback for any transition not covered above (e.g. -> Expired, -> Sold)
+    function setStatus(carId, status, selectEl){
+        $.ajax({
+            url: `/cars/${carId}/status`,
+            type: 'POST',
+            data: {
+                _token: csrfToken,
+                status: status
+            },
+            success: function(res){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: res.message || 'Car Page Status Updated'
+                });
+                location.reload();
+            },
+            error: function (xhr){
+                if (selectEl) selectEl.value = selectEl.dataset.current;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: xhr.responseJSON?.message || 'An error occurred'
+                });
+            }
+        });
+    }
+
+    // ---------- route each status-select change to the right function ----------
+    $(document).on('change', '.status-select', function () {
+        const carId = $(this).data('car-id');
+        const previous = $(this).data('current');
+        const next = this.value;
+        const selectEl = this;
+
+        if (previous === 'draft' && next === 'active') {
+            activate(carId, selectEl);
+        } else if (next === 'paused') {
+            deactivate(carId, selectEl);
+        } else if (previous === 'paused' && next === 'active') {
+            reactivate(carId, selectEl);
+        } else {
+            setStatus(carId, next, selectEl);
+        }
     });
 
+    // ---------- delete ----------
+    $(document).on('click', '.delete-btn', function () {
+        const carId = $(this).data('car-id');
+        const url = $(this).data('url');
+
+        Swal.fire({
+            icon: 'warning',
+            title: 'Delete this listing?',
+            text: 'This cannot be undone.',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            confirmButtonColor: '#c0391a',
+        }).then((result) => {
+            if (!result.isConfirmed) return;
+
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                data: { _token: csrfToken },
+                success: function () {
+                    document.querySelectorAll(`[data-row-id="${carId}"]`).forEach(el => el.remove());
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted',
+                        text: 'Vehicle deleted successfully.',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                },
+                error: function (xhr){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: xhr.responseJSON?.message || 'Could not delete this listing.'
+                    });
+                }
+            });
+        });
+    });
 </script>
 
 </body>
