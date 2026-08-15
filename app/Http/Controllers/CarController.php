@@ -69,7 +69,7 @@ class CarController extends Controller
     ->groupBy('month')
     ->pluck('total', 'month');
 
-        return view('luno.cars.show', [
+        return view('modern.cars.show', [
             'car'=>$car,
             'months' => $months,
             'offersData' => $months->map(fn ($m) => $offers[$m] ?? 0),
