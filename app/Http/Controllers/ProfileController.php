@@ -17,7 +17,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('luno.profile.edit', [
+        return view('modern.profile.edit', [
             'user' => $request->user(),
         ]);
     }
